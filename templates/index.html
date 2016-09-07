@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Достопримечательности</title>
+	<link rel="stylesheet" href="/media/css/altrone.css">
+	<link rel="stylesheet" href="/media/css/font-awesome.css">
+	<link rel="stylesheet" href="/media/css/common.css">
+	<script src="/media/js/jquery.js"></script>
+	<script src="/media/js/handlebars.js"></script>
+	<script src="/media/js/common.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUcFTiaeDzDCfuUdXSPtalvEXyKLCMJ7U&callback=initMap" async defer></script>
+	<script src="/media/js/altrone.js"></script>
+</head>
+<body>
+	<div id="map"></div>
+	<div class="content">
+		<div class="grid padding-top-1 padding-horizontal-1 size-fix">
+			<div class="col-10 margin-left-1 padding-horizontal-1">
+				<div class="col-12"><div class="form form--fit padding-horizontal-0 form--no-smooth"><input type="text" placeholder="Поиск..." class="shadow-1 margin-0"></div></div>
+
+				<div class="col-12 padding-vertical-1">
+					<div class="card margin-0 margin-top-1 card--no-smooth shadow-1">
+						<div class="card__content padding-0">
+							<div class="taskbar">
+								<div class="taskbar__item violet-bg taskbar__item--no-hover white-fg" style="display: none;" id="backButton"><i class="fa fa-arrow-left"></i></div>
+								<div class="taskbar__item taskbar__item--hover-color-violet" id="refreshButton"><i class="fa fa-undo"></i></div>
+								<div class="taskbar__item">Результаты поиска: Чехия</div>
+							</div>
+							<div class="card-content">
+								<div class="sights-list">
+									<div class="sights-list__item">
+										<div class="sights-list__item__title">Карлов мост</div>
+										<div class="sights-list__item__content">Чехия, Прага</div>
+									</div>
+									<div class="sights-list__item">
+										<div class="sights-list__item__title">Кремль</div>
+										<div class="sights-list__item__content">Россия, Москва</div>
+									</div>
+									<div class="sights-list__item">
+										<div class="sights-list__item__title">Статуя свободы</div>
+										<div class="sights-list__item__content">США, Нью-Йорк</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+				</div>				
+			</div>			
+		</div>
+	</div>
+
+{% verbatim %}
+	<script type="text/html" id="sightsListTemplate">
+		
+	</script>
+
+	<script type="text/html" id="sightDetailTemplate">
+		<div class="carousel">
+			<div class="carousel__item">
+				<img src="http://static.tonkosti.ru/images/5/58/%D0%A1%D1%82%D0%B5%D0%BD%D1%8B_%D0%BC%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8F.jpg" alt="">
+				<div class="carousel__item__text">{{title}}</div>
+			</div>
+			<div class="carousel__item">
+				<img src="http://media.ykt.ru/upload/photo/2014/12/26/foto_Kreml_.jpeg" alt="">
+				<div class="carousel__item__text">{{title}}</div>
+			</div>
+		</div>
+		<div class="padding-2">
+			<h1 class="helvetica-ultra margin-bottom-05">{{title}}</h1>
+			<p class="m-gray-fg">{{place}}</p>
+			<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ducimus dolorum natus eligendi laboriosam deleniti! Ut vero laboriosam pariatur ducimus delectus placeat sapiente, rerum optio, possimus nam facilis corrupti consequuntur!</span>
+			<span>Quas, tenetur pariatur, possimus eligendi, animi magni fuga veniam autem libero, velit aspernatur consequatur vel nostrum numquam repellat. Tempore expedita labore ut facere quas nisi, minima consequuntur excepturi voluptas? Rerum.</span>
+			<span>Magni laboriosam eum illo, pariatur hic sed, qui quaerat porro id tempore reiciendis blanditiis ullam repellat sit enim tenetur, ipsum nam quos aperiam voluptatum dicta. Magni et illum adipisci fugiat.</span>
+			<span>Dolor officia impedit minus saepe culpa optio rerum sed praesentium ducimus sit earum voluptatibus similique, nisi, eius sint amet, facilis cupiditate inventore quod delectus alias? Facere incidunt doloremque eum et?</span>
+			<span>Dolor, odit aspernatur architecto dolores enim. Sapiente minus sint, delectus sit facere dolor nam perspiciatis suscipit, cumque eius laborum dolorem reiciendis assumenda nemo vero odio minima ullam enim ipsum dolore.</span></p>
+		</div>
+		
+	</script>
+{% endverbatim %}
+</body>
+</html>

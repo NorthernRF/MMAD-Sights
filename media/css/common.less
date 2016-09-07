@@ -1,0 +1,46 @@
+@import "vars.less";
+
+html, body, #map {
+	width: 100%;
+	height: 100%;
+}
+
+#map {
+	position: fixed;
+}
+
+.content {
+	position: absolute;
+	z-index: 2;
+	top: 0px;
+	left: 0px;
+	width: 50%;
+}
+
+.sights-list {
+	width: 100%;
+
+	.sights-list__item {
+		display: block;
+		width: ~"calc(100% - 2em)";
+		color: @d-gray;
+		padding: 0.5em 1em;
+		cursor: pointer;
+		.pt();
+
+		.sights-list__item__title {			
+			font-weight: bold;
+		}
+
+		.sights-list__item__content {
+			color: @m-gray;
+			font-size: 0.9em;
+			width: 100%;
+		}
+
+		&:hover {
+			background-color: @u-gray;
+			.anim(0.3s);
+		}
+	}
+}
