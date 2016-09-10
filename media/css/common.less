@@ -1,12 +1,14 @@
 @import "vars.less";
 
+
+
 html, body, #map {
 	width: 100%;
 	height: 100%;
 }
 
 #map {
-	position: fixed;
+	position: fixed !important;
 }
 
 .content {
@@ -14,7 +16,35 @@ html, body, #map {
 	z-index: 2;
 	top: 0px;
 	left: 0px;
-	width: 50%;
+	width: 50%;	
+}
+
+.search_field {
+	background-color: @u-gray;
+	width: 100%;
+	display: none;
+
+	img {
+		width: 1em !important;
+		height: auto !important;
+	}
+}
+
+.search-icon {
+	background-image: @search-icon;
+	background-size: 1em;
+	background-repeat: no-repeat;
+	background-position: 0.5em center;
+	padding-left: 2em !important;
+}
+
+.overlay {
+	background-color: rgba(red(@purple), blue(@purple), blue(@purple), .75);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
 
 .sights-list {
@@ -26,6 +56,7 @@ html, body, #map {
 		color: @d-gray;
 		padding: 0.5em 1em;
 		cursor: pointer;
+		position: relative;
 		.pt();
 
 		.sights-list__item__title {			
@@ -38,9 +69,57 @@ html, body, #map {
 			width: 100%;
 		}
 
+		.rating {
+			position: absolute;
+			border: 2px solid @olive;
+			border-radius: 50%;
+			font-size: 1.2em;
+			padding: 0.5em;
+			width: 48px;
+			height: 48px;
+			box-sizing: border-box;
+			color: @olive;
+			right: 0px;
+			top: -16px;
+
+			&.gray {
+				border-color: @m-gray;
+				color: @m-gray;
+			}
+
+			&.red {
+				border-color: @red;
+				color: @red;
+			}
+
+			&.orange {
+				border-color: @orange;
+				color: @orange;
+			}
+
+			&.yellow {
+				border-color: @yellow;
+				color: @yellow;
+			}
+
+			&.olive {
+				border-color: @olive;
+				color: @olive;
+			}
+
+			&.green {
+				border-color: @green;
+				color: @green;
+			}
+		}
+
 		&:hover {
 			background-color: @u-gray;
 			.anim(0.3s);
 		}
 	}
+}
+
+.carousel__panel__navigation {
+	flex: 2 !important;
 }
