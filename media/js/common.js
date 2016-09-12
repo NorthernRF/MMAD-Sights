@@ -1,12 +1,14 @@
+var map = null;
+
 function initMap() {
 	var options = {
 		scrollwheel: false,
 		zoom: 8,
-		disableDefaultUI: true,
+		disableDefaultUI: false,
 		center: {lat: 58.6011769, lng: 49.6525304},
 	}
 
-	var map = new google.maps.Map(document.getElementById('map'), options);
+	map = new google.maps.Map(document.getElementById('map'), options);
 }
 
 // google.maps.event.addDomListener(window, "load", initialize);
@@ -35,6 +37,17 @@ $(function() {
 		var template = Handlebars.compile(source);
 		var html = template(sights_list[array_id]);
 		$('.card-content').append(html);
+
+		var coords = sights_list[array_id].coords;
+		var gCoords = {
+			lat: coords[0], 
+			lng: coords[1]
+		}
+		var marker = new google.maps.Marker({
+	        map: map,
+	        position: gCoords,
+	        title: 'Hello World!'
+        });
 
 		var carousel = new Carousel($('body .carousel'));
 	});

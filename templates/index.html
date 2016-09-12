@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div id="map"></div>
-	<div class="overlay"></div>
+	<!-- <div class="overlay"></div> -->
 	<div class="content">
 		<div class="grid padding-top-1 padding-horizontal-1 size-fix" style="z-index: 2;">
 			<div class="col-10 margin-left-1 padding-horizontal-1">
@@ -82,18 +82,22 @@
 		</div>
 		<div class="padding-2">
 			<h1 class="helvetica-ultra margin-bottom-05">{{title}}</h1>
-			<p class="m-gray-fg"><i class="icon-pointer"></i>{{#if city}}{{city}}, {{/if}}{{country}}</p>
-			<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ducimus dolorum natus eligendi laboriosam deleniti! Ut vero laboriosam pariatur ducimus delectus placeat sapiente, rerum optio, possimus nam facilis corrupti consequuntur!</span>
-			<span>Quas, tenetur pariatur, possimus eligendi, animi magni fuga veniam autem libero, velit aspernatur consequatur vel nostrum numquam repellat. Tempore expedita labore ut facere quas nisi, minima consequuntur excepturi voluptas? Rerum.</span>
-			<span>Magni laboriosam eum illo, pariatur hic sed, qui quaerat porro id tempore reiciendis blanditiis ullam repellat sit enim tenetur, ipsum nam quos aperiam voluptatum dicta. Magni et illum adipisci fugiat.</span>
-			<span>Dolor officia impedit minus saepe culpa optio rerum sed praesentium ducimus sit earum voluptatibus similique, nisi, eius sint amet, facilis cupiditate inventore quod delectus alias? Facere incidunt doloremque eum et?</span>
-			<span>Dolor, odit aspernatur architecto dolores enim. Sapiente minus sint, delectus sit facere dolor nam perspiciatis suscipit, cumque eius laborum dolorem reiciendis assumenda nemo vero odio minima ullam enim ipsum dolore.</span></p>
+			<div class="grid">
+				<div class="col-9">
+					<p class="m-gray-fg"><i class="icon-pointer padding-right-1"></i>{{#if city}}{{city}}, {{/if}}{{country}}</p>
+				</div>
+				<div class="col-3 align-right">
+					<p class="{{color}}-fg"><i class="icon-star padding-right-1"></i>{{rating}}</p>
+				</div>
+			</div>
+			
+			{{{description}}}
 			<div class="align-center"><button class="button--color-blue button--rounded button--only-borders">Подробнее</button></div>
 		</div>		
 	</script>
 
 	<script type="text/html" id="citiesListTemplate">
-		<button class="button--only-borders button--size-small button--color-green button--rounded" data-country-id="{{country}}">Общие</button>
+		<button class="button--only-borders button--size-small button--color-green button--rounded" data-city-url="{{url}}" data-city-country-id="{{id}}">Все</button>
 		{{#each cities}}
 		<button class="button--only-borders button--size-small button--color-blue button--rounded" data-city-url="{{url}}" data-city-country-id="{{country}}" data->{{title}}</button>
 		{{/each}}

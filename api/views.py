@@ -72,6 +72,7 @@ class SightsAPI(APIView):
 					})
 			return Response({
 				"url": page_url,
+				"id": country_id,
 				"cities": cities
 			})
 
@@ -111,6 +112,8 @@ class SightsAPI(APIView):
 					except IndexError:						
 						if city_name:
 							city = city_name
+							if city == 'Все':
+								city = False
 						else:
 							city = False
 					category = (record.select('.rtype span'))[0].decode_contents()
@@ -149,11 +152,32 @@ class SightsAPI(APIView):
 
 				i = 0
 				for s in sights:		
-					print(s['title'])				
 					sight_page = urllib.urlopen(s['url'])
 					sight_document = bs(sight_page, 'html.parser')
 					sight_document.script.decompose()
-					description = sight_document.find('div', {"class": "record"})
+					description_string = str(sight_document.find('div', {"class": "record"}))
+					desc_start = '</script>\n<!--/noindex-->\n</div>\n'
+					desc_end = '<!--noindex-->\n<div class="share">'
+					start_position = int(description_string.find(desc_start))
+					end_position = int(description_string.find(desc_end))
+					desc = str(description_string[start_position + 33:end_position])
+
+					coords_str = ['', '']
+					coords_counter = 0
+					startPosition = description_string.find('LatLng(') + 6
+					j = 0
+					while True:
+						position = startPosition + j
+						if description_string[position] != ')':
+							if description_string[position] == ' ':
+								coords_counter = 1
+							if description_string[position] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']:
+								coords_str[coords_counter] += description_string[position]
+						else:
+							break
+						j += 1
+
+					coords = [float(c) for c in coords_str]
 
 						# desc = sight_document.select('.record')[0]
 						# desc_page = bs(str(desc))
@@ -177,7 +201,8 @@ class SightsAPI(APIView):
 					images = [('http://discoveric.ru' + image['href']) for image in images_list]
 
 					sights[i]['images'] = images
-					sights[i]['description'] = str(description)
+					sights[i]['description'] = desc
+					sights[i]['coords'] = coords
 
 					i += 1					
 				
