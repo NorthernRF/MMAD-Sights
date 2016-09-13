@@ -15,7 +15,6 @@
 </head>
 <body>
 	<div id="map"></div>
-	<!-- <div class="overlay"></div> -->
 	<div class="content">
 		<div class="grid padding-top-1 padding-horizontal-1 size-fix" style="z-index: 2;">
 			<div class="col-10 margin-left-1 padding-horizontal-1">
@@ -25,31 +24,12 @@
 				<div class="col-12 padding-vertical-1">
 					<div class="card margin-0 margin-top-1 card--no-smooth shadow-1">
 						<div class="card__content padding-0">
-							<div class="taskbar">
-								<div class="taskbar__item violet-bg taskbar__item--no-hover white-fg" style="display: none;" id="backButton"><i class="icon-action-undo"></i></div>
-								<div class="taskbar__item taskbar__item--hover-color-violet" id="refreshButton"><i class="icon-reload"></i></div>
-								<div class="taskbar__item" style="display: none;" id="searchResultsTab">Результаты поиска: <span></span><i class="icon-close margin-left-1"></i></div>
-							</div>
 							<div class="card-content" id="cardContent">
 								<div class="image align-center padding-vertical-2">
 									<img src="http://cliparts.co/cliparts/6ir/oGg/6iroGgoBT.png" alt="" class="img--circle" style="width: 150px; height: auto;">
 								</div>								
 								<h2 class="helvetica-ultra align-center">Выберите страну</h2>
 								<p class="m-gray-fg align-center margin-horizontal-2 padding-bottom-3">Введите название страны, чтобы посмотреть ее достопримечательности.</p>
-								<!-- <div class="sights-list">
-									<div class="sights-list__item">
-										<div class="sights-list__item__title">Карлов мост</div>
-										<div class="sights-list__item__content">Чехия, Прага</div>
-									</div>
-									<div class="sights-list__item">
-										<div class="sights-list__item__title">Кремль</div>
-										<div class="sights-list__item__content">Россия, Москва</div>
-									</div>
-									<div class="sights-list__item">
-										<div class="sights-list__item__title">Статуя свободы</div>
-										<div class="sights-list__item__content">США, Нью-Йорк</div>
-									</div>
-								</div> -->
 							</div>							
 						</div>
 					</div>
@@ -92,15 +72,17 @@
 			</div>
 			
 			{{{description}}}
-			<div class="align-center"><button class="button--color-blue button--rounded button--only-borders">Подробнее</button></div>
+			<a href="{{url}}" target="blank"><div class="align-center"><button class="button--color-blue button--rounded button--only-borders">Подробнее</button></div></a>
 		</div>		
 	</script>
 
 	<script type="text/html" id="citiesListTemplate">
-		<button class="button--only-borders button--size-small button--color-green button--rounded" data-city-url="{{url}}" data-city-country-id="{{id}}">Все</button>
-		{{#each cities}}
-		<button class="button--only-borders button--size-small button--color-blue button--rounded" data-city-url="{{url}}" data-city-country-id="{{country}}" data->{{title}}</button>
-		{{/each}}
+		<div class="padding-1">
+			<button class="button--only-borders button--size-small button--color-green button--rounded" data-city-url="{{url}}" data-city-country-id="{{id}}">Все</button>
+			{{#each cities}}
+			<button class="button--only-borders button--size-small button--color-blue button--rounded" data-city-url="{{url}}" data-city-country-id="{{country}}" data->{{title}}</button>
+			{{/each}}
+		</div>		
 	</script>
 
 	<script type="text/html" id="searchFieldTemplate">
