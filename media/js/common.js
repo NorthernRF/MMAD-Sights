@@ -23,35 +23,22 @@ $(function() {
 	$('body').on('click', '.sights-list .sights-list__item', function() {
 		var current = $(this);
 		var array_id = parseInt($(this).data('arrayId'));
-		var title = current.find('.sights-list__item__title').text();
-		var place = current.find('.sights-list__item__content').text();
+		// var title = current.find('.sights-list__item__title').text();
+		// var place = current.find('.sights-list__item__content').text();
 
+		showInfo(sights_list[array_id]);
+	});
+
+	function showInfo(current) {
 		$('.card-content').html('');
 
 		var source = $('#sightDetailTemplate').html();
 		var template = Handlebars.compile(source);
-		var html = template(sights_list[array_id]);
-		$('.card-content').html(html);
-
-		var coords = sights_list[array_id].coords;
-		var gCoords = {
-			lat: coords[0], 
-			lng: coords[1]
-		}
-
-		map.setCenter(gCoords);
-		setTimeout(function() {
-			var marker = new google.maps.Marker({
-		        map: map,
-		        position: gCoords,
-		        animation: google.maps.Animation.DROP,
-		        title: sights_list[array_id].title
-	        });
-	        markers.append(marker);
-		}, 1000);		
+		var html = template(current);
+		$('.card-content').html(html);		
 
 		var carousel = new Carousel($('body .carousel'));
-	});
+	}
 
 	$('#searchField').keyup(function() {
 		var query = $('#searchField').val();
@@ -96,9 +83,7 @@ $(function() {
         	}
         });
 
-        for (var i = 0; i < markers.length; i++) {
-		    markers[i].setMap(null);
-		}
+        
 	}
 
 	$('body').on('click', '[data-country-id]', function() {
@@ -130,13 +115,47 @@ $(function() {
 		}, function (response) {  
 			console.log(response);
         	if (response != "ok") {
+        		for (var i = 0; i < markers.length; i++) {
+				    markers[i].setMap(null);
+				}
+
         		var source = $('#sightsListTemplate').html();
 				var template = Handlebars.compile(source);
 				var html = template(response);
 				$('#cardContent').html(html);
 
 				sights_list = response;
-        	}
+
+				for (var i = 0; i < sights_list.length; i++) {
+					var current = sights_list[i];
+					var coords = current.coords;
+
+					var gCoords = {
+						lat: coords[0], 
+						lng: coords[1]
+					}
+
+					if (i == 0) {
+						map.setCenter(gCoords);
+					}
+					
+					// setTimeout(function() {
+					var marker = new google.maps.Marker({
+				        map: map,
+				        position: gCoords,
+				        animation: google.maps.Animation.DROP,
+				        title: current.title
+			        });
+			        marker.addListener('click', function() {
+			        	showInfo(current);
+			        	console.log(i - 1);
+			        })
+			        markers.push(marker);
+					// }, 1000);
+				}
+
+				
+		    }
         });
 	});
 });

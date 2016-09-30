@@ -87,19 +87,7 @@ class SightsAPI(APIView):
 
 				page_url = city_url
 				page = urllib.urlopen(page_url)
-				document = bs(page, 'html.parser')
-
-				# pages_count = round(len(document.select('.fpage .filter_cont a')) / 2)
-				# print(pages_count)
-
-				# for i in range(1, pages_count + 1):
-				# 	if i == 1:
-				# 		current_page_url = country.url
-				# 	else:
-				# 		current_page_url = country.url + '/page-' + str(i)
-
-				# current_page = urllib.urlopen(current_page_url)
-				# current_document = bs(current_page, 'html.parser')				
+				document = bs(page, 'html.parser')		
 
 				records_list = document.select('.records_list .record')
 				i = 0
@@ -178,24 +166,6 @@ class SightsAPI(APIView):
 						j += 1
 
 					coords = [float(c) for c in coords_str]
-
-						# desc = sight_document.select('.record')[0]
-						# desc_page = bs(str(desc))
-						# # record_div  = desc_page.html.find(text = True)
-						# desc_page.script.decompose()
-						# desc_page.h1.decompose()
-						# desc_page.ul.decompose()
-						# desc_page.a.decompose()
-						# desc_page.find('div', class_ = 'rating').decompose()
-						# description = desc_page.prettify()
-						# description = record_div
-
-						# description = sight_document.select('div.record')
-						# description_page = bs(description, 'html.parser')
-						# desc = bs.BeautifulSOAP(description).html.find(text = True, recursive = False)
-						# description = sight.find('script').decompose()
-
-						# description = sight_document.select('.record')
 
 					images_list = sight_document.select('.photos li a')
 					images = [('http://discoveric.ru' + image['href']) for image in images_list]

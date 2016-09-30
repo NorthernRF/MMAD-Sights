@@ -105,3 +105,6 @@ body,
 .carousel__panel__navigation {
   flex: 2 !important;
 }
+iframe {
+  width: 100% !important;
+}
